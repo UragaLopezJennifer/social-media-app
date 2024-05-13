@@ -1,7 +1,6 @@
 import './App.css'
 import React, { useState } from 'react';
 
-import Post from './components/Post';
 import CreatePostForm from './components/CreatePostForm';
 import Feed from './components/Feed';
 

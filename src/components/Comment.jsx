@@ -1,10 +1,16 @@
 import React from 'react';
 
 function Comment(props){
+  
+  let renderList = () => {
+    console.log(props.data)
+    return props.data.map((data, i) => {
+        return <p key={i}>{data}</p>
+    })
+  }
   return(
-    <div>
-      <p>{props.title}</p>
-      <p>{props.content}</p>
+    <div classname="comments">
+      {renderList()}
     </div> )
 }
 

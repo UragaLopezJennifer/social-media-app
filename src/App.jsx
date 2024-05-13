@@ -1,14 +1,13 @@
 import './App.css'
-import React from 'react';
+import React, { useState } from 'react';
 
 import Post from './components/Post';
 import CreatePostForm from './components/CreatePostForm';
-
-import { useState } from 'react'
+import Feed from './components/Feed';
 
 function App(){
 
-  const [newPost, setNewPost] = useState([])
+  let [newPost, setNewPost] = useState([])
 
   let handleNewSubmission = (data) => {
     setNewPost([...newPost, data])
@@ -17,12 +16,11 @@ function App(){
   return(
     <div>
       <h1>Fakebook!</h1>
-        <CreatePostForm onNewSubmit={handleNewSubmission} />
-        {/* CreatePostForm */}
-        {/* Feed */}
-        <Post content="This is a test post!" />
-        <Post content="This is another test post!" />
-    </div> )
+        <CreatePostForm handleSubmit={handleNewSubmission} />
+        <Feed data={newPost}/>
+        
+    </div> 
+  )
 }
 
 export default App

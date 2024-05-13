@@ -1,44 +1,45 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 function CreatePostForm(props){
 
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
+    const [postTitle, setPostTitle] = useState("")
+    const [postContent, setPostContent] = useState("")
 
-    let handleSubmit = (event) => {
-        event.preventDefault()
-        
-        if(title === "" || content == ""){
-            alert("Title and Content are required!")
-        } else {
-            console.log(title, content)
-            props.onNewSubmit({title,content})
-            setTitle("")
-            setContent("")
-        }    
+    const handleTitleChange = (event) => {
+        setPostTitle(event.target.value)
     }
 
-    let handleTitleChange = (event) => {
-        setTitle(event.target.value)
+    const handleContentChange = (event) => {
+        setPostContent(event.target.value)
     }
 
-    let handleContentChange = (event) => {
-        setContent(event.target.value)
-    }
 
     return(
-        <form onSubmit={handleSubmit}>
-            <label for="titleInfo">Title</label>
-            <input type="text" name="titleInfo" onChange={handleTitleChange} value={title}/>
-            <br/>
-            <label for="contentInfo">Content</label>
-            <input type="text" name="contentInfo" onChange={handleContentChange} value={content}/>
-            
-            <br/>
-            <br/>
+        <form onSubmit={(event)=> {
+            event.preventDefault()
 
-            <input type="submit" disabled={title === "" || content === ""}/>
+            if(postTitle != ""){
+                props.handleSubmit({title: postTitle, content: postContent})
+            } else{
+                alert("posts need a message")
+            }
+        
+        }} >
+        <label>
+        <h3>Title</h3>
+        <input type="text" onChange={handleTitleChange} value={postTitle}/>
+        </label>
+
+        <label>
+        <h3>Content</h3>
+        <input type="text" onChange={handleContentChange} value={postContent}/>
+        </label>
+       
+        <br></br>
+        <br></br>
+        <input type="submit"/>
         </form>
+       
     )
 }
 
